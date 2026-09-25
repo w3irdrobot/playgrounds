@@ -1,0 +1,14 @@
+package transponster:runtime;
+
+world runtime {
+    enum error {
+        length-out-of-bounds,
+        entropy-generation-failed,
+    }
+
+    import log: func(message: string);
+    import get-entropy: func(length: u32) -> result<list<u8>, error>;
+
+    export name: func() -> string;
+    export run: func();
+}

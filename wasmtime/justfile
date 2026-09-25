@@ -1,0 +1,37 @@
+_default:
+    @just --list
+
+fmt:
+    @cargo fmt
+
+lint:
+    @cargo check
+    @cargo clippy
+
+build: build-runtime build-print
+
+run:
+    @target/debug/runtime print.debug.wasm
+
+build-runtime:
+    @cargo build -p runtime
+
+build-print:
+    @cargo build -p print --target wasm32-unknown-unknown
+    @wasm-tools component new \
+        ./target/wasm32-unknown-unknown/debug/print.wasm \
+        -o print.debug.wasm
+
+build-release: build-release-runtime build-release-print
+
+run-release: build-release
+    @target/release/runtime print.release.wasm
+
+build-release-runtime:
+    @cargo build -p runtime --release
+
+build-release-print:
+    @cargo build -p print --target wasm32-unknown-unknown --release
+    @wasm-tools component new \
+        ./target/wasm32-unknown-unknown/release/print.wasm \
+        -o print.release.wasm

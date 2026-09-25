@@ -1,0 +1,3 @@
+[serve]
+tls_key_path = "localhost.key"
+tls_cert_path = "localhost.crt"

@@ -1,0 +1,24 @@
+_default:
+    just --list
+
+fmt:
+    @cargo +nightly fmt
+
+build: build-server
+
+build-server:
+    @cargo build --release -p backend
+
+[parallel]
+run: run-server run-frontend
+
+run-server:
+    watchexec \
+        --exts rs \
+        --debounce 2s \
+        cargo run -p backend -F dev
+
+run-frontend:
+    trunk serve \
+        --config crates/frontend/Trunk.toml \
+        --features dev

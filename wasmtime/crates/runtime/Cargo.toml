@@ -1,0 +1,9 @@
+[package]
+name = "runtime"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+wasmtime = { version = "48.0.2" }
+wit = { path = "../wit", features = ["server"], default-features = false }
+rand = "0.10.2"
