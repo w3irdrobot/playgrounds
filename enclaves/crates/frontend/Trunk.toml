@@ -3,8 +3,8 @@ dist = "../../dist"
 
 [serve]
 port = 3001
-tls_key_path = "crates/frontend/localhost.key"
-tls_cert_path = "crates/frontend/localhost.crt"
+tls_key_path = "certs/localhost.key"
+tls_cert_path = "certs/localhost.crt"
 
 [[proxy]]
 backend = "http://localhost:3000/api"

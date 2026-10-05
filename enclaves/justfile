@@ -1,13 +1,30 @@
+set shell := ["bash", "-cu"]
+
 _default:
     just --list
+
+gen_certs:
+    nsm-keygen generate --format der --dir certs/
+    openssl req -x509 -nodes -sha256 \
+        -out certs/localhost.crt \
+        -keyout certs/localhost.key \
+        -newkey rsa:2048 \
+        -subj '/CN=localhost' \
+        -extensions EXT \
+        -config <(printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
 fmt:
     @cargo +nightly fmt
 
-build: build-server
+build: build-server build-frontend
 
 build-server:
     @cargo build --release -p backend
+
+build-frontend:
+    @trunk build \
+        --config crates/frontend/Trunk.toml \
+        --release
 
 [parallel]
 run: run-server run-frontend

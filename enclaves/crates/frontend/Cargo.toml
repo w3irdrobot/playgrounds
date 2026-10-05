@@ -6,14 +6,18 @@ edition = "2024"
 [dependencies]
 anyhow = "1.0.104"
 console_log = "1.1.0"
-hex = "0.4.3"
-k256 = "0.14.0"
+getrandom = { version = "0.4.3", features = ["wasm_js"] }
 log = "0.4.34"
-nsm-nitro-enclave-utils = { version = "0.1.3", features = ["verify"] }
+nsm-nitro-enclave-utils = { version = "0.1.3", default-features = false, features = [
+    "verify",
+] }
 rand = "0.10.3"
 reqwest = { version = "0.13.5", features = ["json"] }
+sha2 = "0.11.0"
 shared = { path = "../shared" }
+uuid = { version = "1.26.1", features = ["js"] }
 web-sys = "0.3.106"
+x25519-dalek = { version = "3.0.0", features = ["getrandom"] }
 
 [features]
 dev = []

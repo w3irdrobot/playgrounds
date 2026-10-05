@@ -6,13 +6,18 @@ edition = "2024"
 [dependencies]
 anyhow = "1.0.104"
 axum = { version = "0.8.9", features = ["macros"] }
-hex = "0.4.3"
-k256 = "0.14.0"
+dotenvy = "0.15.7"
+env_logger = "0.11.11"
+log = "0.4.34"
 nsm-nitro-enclave-utils = "0.1.3"
 rand = "0.10.3"
+serde = { version = "1.0.229", features = ["derive"] }
 sha2 = "0.11.0"
-shared = { path = "../shared", features = ["server"] }
+shared = { path = "../shared" }
+thiserror = "2.0.21"
 tokio = { version = "1.53.1", features = ["macros", "rt-multi-thread"] }
+uuid = "1.26.1"
+x25519-dalek = { version = "3.0.0", features = ["getrandom"] }
 
 [features]
 dev = ["nsm-nitro-enclave-utils/pki"]
